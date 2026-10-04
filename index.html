@@ -1,1 +1,600 @@
-# loyalty-card
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loyalty Card</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f5;
+    color: #202020;
+}
+
+.container {
+    max-width: 430px;
+    margin: auto;
+    min-height: 100vh;
+    padding: 22px 18px 40px;
+}
+
+/* LOGIN */
+
+.login-screen {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    background: #202020;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #777;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+}
+
+input:focus {
+    border-color: #222;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 14px;
+    background: #202020;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+/* HOME */
+
+.home {
+    display: none;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.greeting {
+    font-size: 14px;
+    color: #777;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #202020;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* LOYALTY CARD */
+
+.loyalty-card {
+    background: #202020;
+    color: white;
+    border-radius: 25px;
+    padding: 25px;
+    min-height: 270px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.cafe-name {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.stamps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.stamp {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.stamp.active {
+    background: white;
+    color: #202020;
+    border-color: white;
+}
+
+.progress-text {
+    margin-top: 25px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* REWARD */
+
+.reward-box {
+    margin-top: 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+}
+
+.reward-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.reward-text {
+    color: #777;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #eee;
+    border-radius: 20px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 40%;
+    background: #202020;
+    border-radius: 20px;
+}
+
+/* BUTTON */
+
+.demo-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 13px;
+    border: 1px solid #ddd;
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* SOCIAL */
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 32px;
+    margin-bottom: 15px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.social {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 18px;
+    padding: 18px;
+    text-decoration: none;
+    color: #202020;
+    text-align: center;
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    margin: auto;
+    border-radius: 50%;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.social-name {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.social-desc {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #777;
+}
+
+/* LOGOUT */
+
+.logout {
+    text-align: center;
+    margin-top: 30px;
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+@media (max-width: 360px) {
+    .stamp {
+        width: 40px;
+        height: 40px;
+    }
+
+    .stamps {
+        gap: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN SCREEN -->
+    <div class="login-screen" id="loginScreen">
+
+        <div class="logo">☕</div>
+
+        <h1>Welcome</h1>
+
+        <p class="subtitle">
+            Join our loyalty program and earn rewards.
+        </p>
+
+        <div class="input-group">
+            <label>Your Name</label>
+            <input
+                type="text"
+                id="nameInput"
+                placeholder="Enter your name"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Mobile Number</label>
+            <input
+                type="tel"
+                id="phoneInput"
+                placeholder="Enter mobile number"
+                maxlength="10"
+            >
+        </div>
+
+        <button class="primary-btn" onclick="login()">
+            CONTINUE
+        </button>
+
+    </div>
+
+
+    <!-- HOME SCREEN -->
+    <div class="home" id="homeScreen">
+
+        <div class="top">
+
+            <div>
+                <div class="greeting">Welcome back 👋</div>
+                <div class="username" id="displayName">
+                    Rahul
+                </div>
+            </div>
+
+            <div class="avatar" id="avatar">
+                R
+            </div>
+
+        </div>
+
+
+        <!-- LOYALTY CARD -->
+
+        <div class="loyalty-card">
+
+            <div class="cafe-name">
+                YOUR CAFE
+            </div>
+
+            <div class="card-title">
+                Loyalty Card
+            </div>
+
+            <div class="stamps" id="stamps">
+
+                <div class="stamp active">✓</div>
+                <div class="stamp active">✓</div>
+                <div class="stamp active">✓</div>
+                <div class="stamp active">✓</div>
+
+                <div class="stamp">5</div>
+                <div class="stamp">6</div>
+                <div class="stamp">7</div>
+                <div class="stamp">8</div>
+                <div class="stamp">9</div>
+                <div class="stamp">10</div>
+
+            </div>
+
+            <div class="progress-text" id="progressText">
+                4 / 10 visits completed
+            </div>
+
+        </div>
+
+
+        <!-- REWARD -->
+
+        <div class="reward-box">
+
+            <div class="reward-title">
+                🎁 Free Coffee
+            </div>
+
+            <div class="reward-text">
+                6 more visits to unlock your reward.
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+        </div>
+
+
+        <!-- DEMO BUTTON -->
+
+        <button class="demo-btn" onclick="addStamp()">
+            + Add Demo Stamp
+        </button>
+
+
+        <!-- SOCIAL LINKS -->
+
+        <div class="section-title">
+            Connect with us
+        </div>
+
+        <div class="social-grid">
+
+            <a
+                class="social"
+                href="https://www.google.com"
+                target="_blank"
+            >
+                <div class="social-icon">
+                    G
+                </div>
+
+                <div class="social-name">
+                    Google
+                </div>
+
+                <div class="social-desc">
+                    Review us on Google
+                </div>
+            </a>
+
+
+            <a
+                class="social"
+                href="https://www.instagram.com"
+                target="_blank"
+            >
+                <div class="social-icon">
+                    ◎
+                </div>
+
+                <div class="social-name">
+                    Instagram
+                </div>
+
+                <div class="social-desc">
+                    Follow us on Instagram
+                </div>
+            </a>
+
+        </div>
+
+
+        <div class="logout" onclick="logout()">
+            Log out
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let stamps = 4;
+
+
+/* LOGIN */
+
+function login() {
+
+    const name =
+        document.getElementById("nameInput").value.trim();
+
+    const phone =
+        document.getElementById("phoneInput").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("Please enter a valid 10 digit mobile number.");
+        return;
+    }
+
+    document.getElementById("displayName").innerText = name;
+
+    document.getElementById("avatar").innerText =
+        name.charAt(0).toUpperCase();
+
+    document.getElementById("loginScreen").style.display = "none";
+
+    document.getElementById("homeScreen").style.display = "block";
+
+}
+
+
+/* ADD DEMO STAMP */
+
+function addStamp() {
+
+    if (stamps >= 10) {
+        alert("Reward unlocked! 🎉");
+        return;
+    }
+
+    stamps++;
+
+    updateCard();
+
+}
+
+
+/* UPDATE CARD */
+
+function updateCard() {
+
+    const stampElements =
+        document.querySelectorAll(".stamp");
+
+    stampElements.forEach((stamp, index) => {
+
+        if (index < stamps) {
+
+            stamp.classList.add("active");
+
+            stamp.innerText = "✓";
+
+        } else {
+
+            stamp.classList.remove("active");
+
+            stamp.innerText = index + 1;
+
+        }
+
+    });
+
+
+    document.getElementById("progressText").innerText =
+        stamps + " / 10 visits completed";
+
+
+    const percentage =
+        (stamps / 10) * 100;
+
+    document.getElementById("progressFill").style.width =
+        percentage + "%";
+
+
+    const remaining =
+        10 - stamps;
+
+    document.querySelector(".reward-text").innerText =
+        remaining === 0
+        ? "🎉 Your reward is ready!"
+        : remaining + " more visits to unlock your reward.";
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    document.getElementById("homeScreen").style.display = "none";
+
+    document.getElementById("loginScreen").style.display = "flex";
+
+}
+
+</script>
+
+</body>
+              </html>
