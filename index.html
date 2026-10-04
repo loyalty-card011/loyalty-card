@@ -3,304 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loyalty Card</title>
+
+<title>Luxury Hotels - Loyalty Card</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+  box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f7f7f5;
-    color: #202020;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f7f7f5;
+  color:#222;
 }
 
-.container {
-    max-width: 430px;
-    margin: auto;
-    min-height: 100vh;
-    padding: 22px 18px 40px;
+.container{
+  width:100%;
+  max-width:430px;
+  margin:auto;
+  padding:22px 16px 40px;
 }
 
-/* LOGIN */
-
-.login-screen {
-    min-height: 92vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.logo{
+  text-align:center;
+  font-size:28px;
+  font-weight:700;
+  margin-top:20px;
 }
 
-.logo {
-    width: 68px;
-    height: 68px;
-    border-radius: 22px;
-    background: #202020;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    margin-bottom: 25px;
+.subtitle{
+  text-align:center;
+  color:#777;
+  margin:8px 0 30px;
 }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
+.box{
+  background:white;
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 8px 30px rgba(0,0,0,.07);
 }
 
-.subtitle {
-    color: #777;
-    margin-bottom: 30px;
-    font-size: 15px;
+input{
+  width:100%;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-bottom:14px;
+  font-size:16px;
+  outline:none;
 }
 
-.input-group {
-    margin-bottom: 16px;
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-label {
-    display: block;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 7px;
+.primary{
+  background:#222;
+  color:white;
 }
 
-input {
-    width: 100%;
-    padding: 16px;
-    border: 1px solid #ddd;
-    border-radius: 14px;
-    font-size: 16px;
-    outline: none;
-    background: white;
+.secondary{
+  background:#eee;
+  color:#222;
 }
 
-input:focus {
-    border-color: #222;
+.hidden{
+  display:none;
 }
 
-.primary-btn {
-    width: 100%;
-    padding: 17px;
-    border: none;
-    border-radius: 14px;
-    background: #202020;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 8px;
+.greeting{
+  margin-bottom:18px;
 }
 
-/* HOME */
-
-.home {
-    display: none;
+.greeting h2{
+  margin:0;
 }
 
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+.greeting p{
+  color:#777;
+  margin:6px 0 0;
 }
 
-.greeting {
-    font-size: 14px;
-    color: #777;
+.card{
+  background:#202020;
+  color:white;
+  border-radius:22px;
+  padding:24px;
+  margin-top:18px;
 }
 
-.username {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 4px;
+.card-title{
+  font-size:14px;
+  opacity:.7;
 }
 
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #202020;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+.card-brand{
+  font-size:23px;
+  font-weight:700;
+  margin-top:5px;
 }
 
-/* LOYALTY CARD */
-
-.loyalty-card {
-    background: #202020;
-    color: white;
-    border-radius: 25px;
-    padding: 25px;
-    min-height: 270px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+.stamps{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+  margin-top:25px;
 }
 
-.cafe-name {
-    font-size: 14px;
-    opacity: 0.7;
+.stamp{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  border:2px solid #777;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  margin:auto;
 }
 
-.card-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 8px;
+.stamp.active{
+  background:white;
+  color:#222;
+  border-color:white;
 }
 
-.stamps {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-top: 35px;
+.progress-text{
+  text-align:center;
+  margin-top:18px;
+  font-size:14px;
+  opacity:.8;
 }
 
-.stamp {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid #777;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
+.reward{
+  background:#fff8df;
+  border-radius:16px;
+  padding:17px;
+  margin-top:18px;
+  color:#5b4900;
+  text-align:center;
+  font-weight:700;
 }
 
-.stamp.active {
-    background: white;
-    color: #202020;
-    border-color: white;
+.message{
+  text-align:center;
+  margin:15px 0;
+  font-size:14px;
+  min-height:20px;
 }
 
-.progress-text {
-    margin-top: 25px;
-    font-size: 14px;
-    opacity: 0.8;
+.links{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
 }
 
-/* REWARD */
-
-.reward-box {
-    margin-top: 20px;
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid #e5e5e5;
+.links a{
+  flex:1;
+  text-decoration:none;
+  text-align:center;
+  padding:13px 8px;
+  border-radius:12px;
+  background:#eee;
+  color:#222;
+  font-weight:600;
+  font-size:14px;
 }
 
-.reward-title {
-    font-size: 17px;
-    font-weight: bold;
-}
-
-.reward-text {
-    color: #777;
-    font-size: 14px;
-    margin-top: 6px;
-}
-
-.progress-bar {
-    height: 8px;
-    background: #eee;
-    border-radius: 20px;
-    margin-top: 15px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 40%;
-    background: #202020;
-    border-radius: 20px;
-}
-
-/* BUTTON */
-
-.demo-btn {
-    width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 13px;
-    border: 1px solid #ddd;
-    background: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* SOCIAL */
-
-.section-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 32px;
-    margin-bottom: 15px;
-}
-
-.social-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.social {
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 18px;
-    padding: 18px;
-    text-decoration: none;
-    color: #202020;
-    text-align: center;
-}
-
-.social-icon {
-    width: 45px;
-    height: 45px;
-    margin: auto;
-    border-radius: 50%;
-    background: #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.social-name {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.social-desc {
-    margin-top: 4px;
-    font-size: 12px;
-    color: #777;
-}
-
-/* LOGOUT */
-
-.logout {
-    text-align: center;
-    margin-top: 30px;
-    color: #888;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-@media (max-width: 360px) {
-    .stamp {
-        width: 40px;
-        height: 40px;
-    }
-
-    .stamps {
-        gap: 8px;
-    }
+.logout{
+  margin-top:15px;
 }
 </style>
 </head>
@@ -309,369 +190,452 @@ input:focus {
 
 <div class="container">
 
-    <!-- LOGIN SCREEN -->
-    <div class="login-screen" id="loginScreen">
+  <!-- LOGIN -->
+  <div id="loginScreen">
 
-        <div class="logo">☕</div>
+    <div class="logo">Luxury Hotels</div>
 
-        <h1>Welcome</h1>
+    <div class="subtitle">
+      Your Digital Loyalty Card
+    </div>
 
-        <p class="subtitle">
-            Join our loyalty program and earn rewards.
-        </p>
+    <div class="box">
 
-        <div class="input-group">
-            <label>Your Name</label>
-            <input
-                type="text"
-                id="nameInput"
-                placeholder="Enter your name"
-            >
-        </div>
+      <input
+        id="name"
+        type="text"
+        placeholder="Your Name"
+        autocomplete="name"
+      >
 
-        <div class="input-group">
-            <label>Mobile Number</label>
-            <input
-                type="tel"
-                id="phoneInput"
-                placeholder="Enter mobile number"
-                maxlength="10"
-            >
-        </div>
+      <input
+        id="mobile"
+        type="tel"
+        placeholder="10-digit Mobile Number"
+        maxlength="10"
+        inputmode="numeric"
+      >
 
-        <button class="primary-btn" onclick="login()">
-            CONTINUE
-        </button>
+      <button class="primary" onclick="login()">
+        Continue
+      </button>
+
+      <div id="loginMessage" class="message"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- HOME -->
+  <div id="homeScreen" class="hidden">
+
+    <div class="greeting">
+
+      <h2 id="welcomeName">Hello</h2>
+
+      <p>
+        Welcome to Luxury Hotels
+      </p>
 
     </div>
 
 
-    <!-- HOME SCREEN -->
-    <div class="home" id="homeScreen">
+    <div class="card">
 
-        <div class="top">
+      <div class="card-title">
+        LOYALTY CARD
+      </div>
 
-            <div>
-                <div class="greeting">Welcome back 👋</div>
-
-                <div class="username" id="displayName">
-                    Rahul
-                </div>
-            </div>
-
-            <div class="avatar" id="avatar">
-                R
-            </div>
-
-        </div>
+      <div class="card-brand">
+        Luxury Hotels
+      </div>
 
 
-        <!-- LOYALTY CARD -->
-
-        <div class="loyalty-card">
-
-            <div class="cafe-name" id="cafeName">
-                LUXURY HOTELS
-            </div>
-
-            <div class="card-title">
-                Loyalty Card
-            </div>
-
-            <div class="stamps" id="stamps">
-
-                <div class="stamp active">✓</div>
-                <div class="stamp active">✓</div>
-                <div class="stamp active">✓</div>
-                <div class="stamp active">✓</div>
-
-                <div class="stamp">5</div>
-                <div class="stamp">6</div>
-                <div class="stamp">7</div>
-                <div class="stamp">8</div>
-                <div class="stamp">9</div>
-                <div class="stamp">10</div>
-
-            </div>
-
-            <div class="progress-text" id="progressText">
-                4 / 10 visits completed
-            </div>
-
-        </div>
+      <div id="stamps" class="stamps"></div>
 
 
-        <!-- REWARD -->
-
-        <div class="reward-box">
-
-            <div class="reward-title">
-                🎁 Free Coffee
-            </div>
-
-            <div class="reward-text">
-                6 more visits to unlock your reward.
-            </div>
-
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-
-        </div>
-
-
-        <!-- DEMO BUTTON -->
-
-        <button class="demo-btn" onclick="addStamp()">
-            + Add Demo Stamp
-        </button>
-
-
-        <!-- SOCIAL LINKS -->
-
-        <div class="section-title">
-            Connect with us
-        </div>
-
-        <div class="social-grid">
-
-            <a
-                class="social"
-                id="googleLink"
-                href="#"
-                target="_blank"
-            >
-                <div class="social-icon">
-                    G
-                </div>
-
-                <div class="social-name">
-                    Google
-                </div>
-
-                <div class="social-desc">
-                    Review us on Google
-                </div>
-            </a>
-
-
-            <a
-                class="social"
-                id="instagramLink"
-                href="#"
-                target="_blank"
-            >
-                <div class="social-icon">
-                    ◎
-                </div>
-
-                <div class="social-name">
-                    Instagram
-                </div>
-
-                <div class="social-desc">
-                    Follow us on Instagram
-                </div>
-            </a>
-
-        </div>
-
-
-        <div class="logout" onclick="logout()">
-            Log out
-        </div>
+      <div id="progressText" class="progress-text">
+        0 / 10 visits
+      </div>
 
     </div>
+
+
+    <div id="rewardBox" class="reward hidden">
+      🎉 Reward unlocked!
+    </div>
+
+
+    <div id="visitMessage" class="message"></div>
+
+
+    <button
+      id="collectButton"
+      class="primary"
+      onclick="collectVisit()"
+    >
+      COLLECT VISIT
+    </button>
+
+
+    <div class="links">
+
+      <a
+        href="https://www.google.com"
+        target="_blank"
+      >
+        ⭐ Google Review
+      </a>
+
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+      >
+        📷 Instagram
+      </a>
+
+    </div>
+
+
+    <button
+      class="secondary logout"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
 
 </div>
 
 
 <script>
 
-/* =========================================
-   CAFE CONFIGURATION
-   ========================================= */
+const SUPABASE_URL =
+  "https://rqjjcyxlfaxlwcrdwgoh.supabase.co";
 
-const cafes = {
+const SUPABASE_KEY =
+  "sb_publishable_FqhEVP3LB3sXyzFXpXeEag_Hh89baC6";
 
-    "luxury-hotels": {
-        name: "Luxury Hotels",
-
-        google:
-            "https://www.google.com",
-
-        instagram:
-            "https://www.instagram.com"
-    }
-
-};
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-/* =========================================
-   READ CAFE FROM URL
-   ========================================= */
-
-const urlParams =
-    new URLSearchParams(window.location.search);
-
-const cafeId =
-    urlParams.get("cafe") || "luxury-hotels";
+let currentCustomer = null;
 
 
-/* =========================================
-   LOAD CAFE
-   ========================================= */
+/* LOGIN */
 
-const cafe =
-    cafes[cafeId] || cafes["luxury-hotels"];
+async function login(){
 
+  const name =
+    document.getElementById("name").value.trim();
 
-/* SET CAFE NAME */
+  const mobile =
+    document.getElementById("mobile").value.trim();
 
-document.getElementById("cafeName").innerText =
-    cafe.name.toUpperCase();
-
-
-/* SET SOCIAL LINKS */
-
-document.getElementById("googleLink").href =
-    cafe.google;
-
-document.getElementById("instagramLink").href =
-    cafe.instagram;
+  const message =
+    document.getElementById("loginMessage");
 
 
-/* =========================================
-   DEMO STAMPS
-   ========================================= */
-
-let stamps = 4;
+  message.textContent = "";
 
 
-/* =========================================
-   LOGIN
-   ========================================= */
+  if(!name){
 
-function login() {
+    message.textContent =
+      "Please enter your name.";
 
-    const name =
-        document.getElementById("nameInput").value.trim();
+    return;
+  }
 
-    const phone =
-        document.getElementById("phoneInput").value.trim();
 
-    if (name === "") {
+  if(!/^[0-9]{10}$/.test(mobile)){
 
-        alert("Please enter your name.");
+    message.textContent =
+      "Please enter a valid 10-digit mobile number.";
 
-        return;
-    }
+    return;
+  }
 
-    if (!/^[0-9]{10}$/.test(phone)) {
 
-        alert("Please enter a valid 10 digit mobile number.");
+  message.textContent =
+    "Loading...";
 
-        return;
-    }
 
-    document.getElementById("displayName").innerText =
-        name;
+  const { data, error } =
+    await supabaseClient.rpc(
+      "get_customer",
+      {
+        p_name:name,
+        p_mobile:mobile
+      }
+    );
 
-    document.getElementById("avatar").innerText =
-        name.charAt(0).toUpperCase();
 
-    document.getElementById("loginScreen").style.display =
-        "none";
+  if(error){
 
-    document.getElementById("homeScreen").style.display =
-        "block";
+    console.error(error);
+
+    message.textContent =
+      "Something went wrong. Please try again.";
+
+    return;
+  }
+
+
+  currentCustomer = data;
+
+
+  localStorage.setItem(
+    "luxury_customer",
+    JSON.stringify(currentCustomer)
+  );
+
+
+  showHome();
 
 }
 
 
-/* =========================================
-   ADD DEMO STAMP
-   ========================================= */
+/* SHOW HOME */
 
-function addStamp() {
+function showHome(){
 
-    if (stamps >= 10) {
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
 
-        alert("Reward unlocked! 🎉");
+  document
+    .getElementById("homeScreen")
+    .classList.remove("hidden");
 
-        return;
+
+  document
+    .getElementById("welcomeName")
+    .textContent =
+      "Hello, " + currentCustomer.name;
+
+
+  updateCard();
+
+}
+
+
+/* UPDATE CARD */
+
+function updateCard(){
+
+  const stampsContainer =
+    document.getElementById("stamps");
+
+  stampsContainer.innerHTML = "";
+
+
+  const stamps =
+    Number(currentCustomer.stamps || 0);
+
+
+  for(let i=1;i<=10;i++){
+
+    const stamp =
+      document.createElement("div");
+
+    stamp.className = "stamp";
+
+
+    if(i <= stamps){
+
+      stamp.classList.add("active");
+
+      stamp.textContent = "✓";
+
+    }else{
+
+      stamp.textContent = i;
+
     }
 
-    stamps++;
+
+    stampsContainer.appendChild(stamp);
+
+  }
+
+
+  document
+    .getElementById("progressText")
+    .textContent =
+      stamps + " / 10 visits";
+
+
+  const rewardBox =
+    document.getElementById("rewardBox");
+
+
+  if(currentCustomer.reward_ready){
+
+    rewardBox.classList.remove("hidden");
+
+  }else{
+
+    rewardBox.classList.add("hidden");
+
+  }
+
+}
+
+
+/* COLLECT VISIT */
+
+async function collectVisit(){
+
+  if(!currentCustomer){
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById("collectButton");
+
+  const message =
+    document.getElementById("visitMessage");
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "Checking...";
+
+  message.textContent = "";
+
+
+  const { data, error } =
+    await supabaseClient.rpc(
+      "collect_visit",
+      {
+        p_mobile:currentCustomer.mobile
+      }
+    );
+
+
+  if(error){
+
+    console.error(error);
+
+    message.textContent =
+      "Something went wrong. Please try again.";
+
+    button.disabled = false;
+
+    button.textContent =
+      "COLLECT VISIT";
+
+    return;
+  }
+
+
+  message.textContent =
+    data.message;
+
+
+  if(data.success){
+
+    currentCustomer.stamps =
+      data.stamps;
+
+    currentCustomer.reward_ready =
+      data.reward_ready;
+
+
+    currentCustomer.last_visit_at =
+      new Date().toISOString();
+
+
+    localStorage.setItem(
+      "luxury_customer",
+      JSON.stringify(currentCustomer)
+    );
+
 
     updateCard();
 
-}
+  }
 
 
-/* =========================================
-   UPDATE CARD
-   ========================================= */
+  button.disabled = false;
 
-function updateCard() {
-
-    const stampElements =
-        document.querySelectorAll(".stamp");
-
-    stampElements.forEach((stamp, index) => {
-
-        if (index < stamps) {
-
-            stamp.classList.add("active");
-
-            stamp.innerText = "✓";
-
-        } else {
-
-            stamp.classList.remove("active");
-
-            stamp.innerText = index + 1;
-
-        }
-
-    });
-
-
-    document.getElementById("progressText").innerText =
-        stamps + " / 10 visits completed";
-
-
-    const percentage =
-        (stamps / 10) * 100;
-
-    document.getElementById("progressFill").style.width =
-        percentage + "%";
-
-
-    const remaining =
-        10 - stamps;
-
-    document.querySelector(".reward-text").innerText =
-        remaining === 0
-        ? "🎉 Your reward is ready!"
-        : remaining + " more visits to unlock your reward.";
+  button.textContent =
+    "COLLECT VISIT";
 
 }
 
 
-/* =========================================
-   LOGOUT
-   ========================================= */
+/* LOGOUT */
 
-function logout() {
+function logout(){
 
-    document.getElementById("homeScreen").style.display =
-        "none";
+  currentCustomer = null;
 
-    document.getElementById("loginScreen").style.display =
-        "flex";
+  localStorage.removeItem(
+    "luxury_customer"
+  );
+
+
+  document
+    .getElementById("homeScreen")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+
+  document.getElementById("name").value = "";
+
+  document.getElementById("mobile").value = "";
 
 }
+
+
+/* REMEMBER CUSTOMER */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    const saved =
+      localStorage.getItem(
+        "luxury_customer"
+      );
+
+
+    if(saved){
+
+      try{
+
+        currentCustomer =
+          JSON.parse(saved);
+
+        showHome();
+
+      }catch(e){
+
+        localStorage.removeItem(
+          "luxury_customer"
+        );
+
+      }
+
+    }
+
+  }
+);
 
 </script>
 
