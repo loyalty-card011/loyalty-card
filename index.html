@@ -353,6 +353,7 @@ input:focus {
 
             <div>
                 <div class="greeting">Welcome back 👋</div>
+
                 <div class="username" id="displayName">
                     Rahul
                 </div>
@@ -369,8 +370,8 @@ input:focus {
 
         <div class="loyalty-card">
 
-            <div class="cafe-name">
-                YOUR CAFE
+            <div class="cafe-name" id="cafeName">
+                LUXURY HOTELS
             </div>
 
             <div class="card-title">
@@ -436,7 +437,8 @@ input:focus {
 
             <a
                 class="social"
-                href="https://www.google.com"
+                id="googleLink"
+                href="#"
                 target="_blank"
             >
                 <div class="social-icon">
@@ -455,7 +457,8 @@ input:focus {
 
             <a
                 class="social"
-                href="https://www.instagram.com"
+                id="instagramLink"
+                href="#"
                 target="_blank"
             >
                 <div class="social-icon">
@@ -485,10 +488,69 @@ input:focus {
 
 <script>
 
+/* =========================================
+   CAFE CONFIGURATION
+   ========================================= */
+
+const cafes = {
+
+    "luxury-hotels": {
+        name: "Luxury Hotels",
+
+        google:
+            "https://www.google.com",
+
+        instagram:
+            "https://www.instagram.com"
+    }
+
+};
+
+
+/* =========================================
+   READ CAFE FROM URL
+   ========================================= */
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const cafeId =
+    urlParams.get("cafe") || "luxury-hotels";
+
+
+/* =========================================
+   LOAD CAFE
+   ========================================= */
+
+const cafe =
+    cafes[cafeId] || cafes["luxury-hotels"];
+
+
+/* SET CAFE NAME */
+
+document.getElementById("cafeName").innerText =
+    cafe.name.toUpperCase();
+
+
+/* SET SOCIAL LINKS */
+
+document.getElementById("googleLink").href =
+    cafe.google;
+
+document.getElementById("instagramLink").href =
+    cafe.instagram;
+
+
+/* =========================================
+   DEMO STAMPS
+   ========================================= */
+
 let stamps = 4;
 
 
-/* LOGIN */
+/* =========================================
+   LOGIN
+   ========================================= */
 
 function login() {
 
@@ -499,33 +561,44 @@ function login() {
         document.getElementById("phoneInput").value.trim();
 
     if (name === "") {
+
         alert("Please enter your name.");
+
         return;
     }
 
     if (!/^[0-9]{10}$/.test(phone)) {
+
         alert("Please enter a valid 10 digit mobile number.");
+
         return;
     }
 
-    document.getElementById("displayName").innerText = name;
+    document.getElementById("displayName").innerText =
+        name;
 
     document.getElementById("avatar").innerText =
         name.charAt(0).toUpperCase();
 
-    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("loginScreen").style.display =
+        "none";
 
-    document.getElementById("homeScreen").style.display = "block";
+    document.getElementById("homeScreen").style.display =
+        "block";
 
 }
 
 
-/* ADD DEMO STAMP */
+/* =========================================
+   ADD DEMO STAMP
+   ========================================= */
 
 function addStamp() {
 
     if (stamps >= 10) {
+
         alert("Reward unlocked! 🎉");
+
         return;
     }
 
@@ -536,7 +609,9 @@ function addStamp() {
 }
 
 
-/* UPDATE CARD */
+/* =========================================
+   UPDATE CARD
+   ========================================= */
 
 function updateCard() {
 
@@ -584,17 +659,21 @@ function updateCard() {
 }
 
 
-/* LOGOUT */
+/* =========================================
+   LOGOUT
+   ========================================= */
 
 function logout() {
 
-    document.getElementById("homeScreen").style.display = "none";
+    document.getElementById("homeScreen").style.display =
+        "none";
 
-    document.getElementById("loginScreen").style.display = "flex";
+    document.getElementById("loginScreen").style.display =
+        "flex";
 
 }
 
 </script>
 
 </body>
-              </html>
+    </html>
